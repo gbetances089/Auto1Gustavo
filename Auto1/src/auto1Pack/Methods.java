@@ -12,6 +12,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Methods {
 	
+	static void waitForLoad(WebDriver driver) {
+        ExpectedCondition<Boolean> pageLoadCondition = new
+                ExpectedCondition<Boolean>() {
+                    public Boolean apply(WebDriver driver) {
+                        return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+                    }
+                };
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(pageLoadCondition);
+    }
+	
+	
 	static void CheckYearCar(WebDriver driver) {
 		if (driver.getPageSource().contains("2014"))
 		{
@@ -24,17 +36,7 @@ public class Methods {
 		}
 	}
 	
-	 static void waitForLoad(WebDriver driver) {
-	        ExpectedCondition<Boolean> pageLoadCondition = new
-	                ExpectedCondition<Boolean>() {
-	                    public Boolean apply(WebDriver driver) {
-	                        return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
-	                    }
-	                };
-	        WebDriverWait wait = new WebDriverWait(driver, 30);
-	        wait.until(pageLoadCondition);
-	    }
-	 
+		 
 	 static void GatherPrices (WebDriver driver) {
 			List<WebElement> price = driver.findElements(By.cssSelector("[class='totalPrice___3yfNv'][data-qa-selector='price'")); 
 			ArrayList strings = new ArrayList<String>();
