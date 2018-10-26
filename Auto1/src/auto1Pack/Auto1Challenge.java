@@ -1,16 +1,10 @@
 package auto1Pack;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 class Auto1Challenge {
@@ -36,7 +30,7 @@ class Auto1Challenge {
 	void test() {		
 		//Goto Autohero page
 			driver.get("https://www.autohero.com/de/search/");
-			
+
 		//Do the required search (cars from 2015+/Descending order
 			driver.findElement(By.xpath("//*[contains(text(), 'Erstzulassung ab')]")).click();
 			Methods.waitForLoad (driver);
@@ -53,7 +47,7 @@ class Auto1Challenge {
 	        System.out.print(s);
 	        This one you got the idea, but it always returned 1
 	        This pagination got me, I couldn't break it and above are the some on the ideas I try, 
-	        my suggestion for this is do it at the API or Unit testing level, of this could be little pieces of code.
+	        my suggestion for this is do it at the either at unit/API testing level or set unique id class for the pagination, of this could be little pieces of code.
 	        */
 			
 	        
@@ -62,19 +56,10 @@ class Auto1Challenge {
 			
 			Methods.waitForLoad (driver);
 		
-		//Gathering prices
-			List<WebElement> price = driver.findElements(By.cssSelector("[class='totalPrice___3yfNv'][data-qa-selector='price'")); 
-			ArrayList strings = new ArrayList<String>();
-				for(int i=0; i<price.size(); i++){
-					strings.add(price.get(i).getText());
-					
-			ArrayList<String> copystrings = new ArrayList(strings);
-			Collections.sort(copystrings, Collections.reverseOrder());
+		//Gathering and comparing prices
+			Methods.GatherPrices(driver);
+	}
 		
-		//Compare prices	
-			Methods.CompareList(strings, copystrings);
-		    }
-		} 
 }
 
 
