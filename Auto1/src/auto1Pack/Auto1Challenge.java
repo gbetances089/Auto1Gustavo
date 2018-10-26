@@ -3,6 +3,7 @@ package auto1Pack;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,13 +16,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 class Auto1Challenge {
 
 	WebDriver driver;
-	
+
 	@BeforeEach
 	void setUp() throws Exception {
-
+		
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\padres\\eclipse-workspace\\Auto1\\chromedriver.exe");
-		driver = new ChromeDriver();
-
+		 driver = new ChromeDriver();
 		
 	}
 
@@ -34,13 +34,16 @@ class Auto1Challenge {
 
 	@Test
 	void test() {		
-		//Go to Autohero page
+		//Goto Autohero page
 			driver.get("https://www.autohero.com/de/search/");
 			
 		//Do the required search (cars from 2015+/Descending order
 			driver.findElement(By.xpath("//*[contains(text(), 'Erstzulassung ab')]")).click();
+			Methods.waitForLoad (driver);
 			driver.findElement(By.name("yearRange.min")).sendKeys("2015");
+			Methods.waitForLoad (driver);
 			driver.findElement(By.name("sort")).sendKeys("Höchster Preis​");
+			Methods.waitForLoad (driver);
 		
 		//Pagination
 			/*String Amount = (driver.findElement(By.cssSelector("[class='resultsAmount___3OrV7'][data-qa-selector='results-amount'")).getText()); 
@@ -55,7 +58,9 @@ class Auto1Challenge {
 			
 	        
 		// Check that cars from 2014 is no present on the page	
-			CheckYearCar(driver);
+			Methods.CheckYearCar(driver);
+			
+			Methods.waitForLoad (driver);
 		
 		//Gathering prices
 			List<WebElement> price = driver.findElements(By.cssSelector("[class='totalPrice___3yfNv'][data-qa-selector='price'")); 
@@ -67,36 +72,10 @@ class Auto1Challenge {
 			Collections.sort(copystrings, Collections.reverseOrder());
 		
 		//Compare prices	
-			CompareList(strings, copystrings);
+			Methods.CompareList(strings, copystrings);
 		    }
 		} 
-	
+}
 
-		private static void CompareList(ArrayList A, ArrayList B) {
-			if (A.equals(B)) { 
-				return;}
-			
-			else {
-				System.out.println("Prices are not sorted correctly");
-			return;}
-		}
-
-
-
-		private static void CheckYearCar(WebDriver driver) {
-			if (driver.getPageSource().contains("2014"))
-			{
-					return;		}
-			else
-			{
-				System.out.println("A car from 2014 is present on this page");
-					return;
-		
-			}
-		}
-	
-	
-	
-	}
 
 
