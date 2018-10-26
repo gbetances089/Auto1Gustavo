@@ -55,7 +55,7 @@ class Auto1Challenge {
 			Methods.CheckYearCar(driver);
 					
 		//Gather and compare that prices are sorted correctly
-			Methods.GatherPrices(driver);
+			Methods.GatherComparePrices(driver);
 	}
 		
 }

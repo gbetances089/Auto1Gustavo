@@ -37,7 +37,7 @@ public class Methods {
 	}
 	
 		 
-	 static void GatherPrices (WebDriver driver) {
+	 static void GatherComparePrices (WebDriver driver) {
 			List<WebElement> price = driver.findElements(By.cssSelector("[class='totalPrice___3yfNv'][data-qa-selector='price'")); 
 			ArrayList strings = new ArrayList<String>();
 				for(int i=0; i<price.size(); i++){
