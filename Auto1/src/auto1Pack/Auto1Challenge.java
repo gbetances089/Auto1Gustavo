@@ -53,10 +53,8 @@ class Auto1Challenge {
 	        
 		// Check that cars from 2014 is no present on the page	
 			Methods.CheckYearCar(driver);
-			
-			Methods.waitForLoad (driver);
-		
-		//Gathering and comparing prices
+					
+		//Gather and compare that prices are sorted correctly
 			Methods.GatherPrices(driver);
 	}
 		
